@@ -16,8 +16,8 @@
     {{ with $data.author }}<p class="book-hero-author">by {{ . }}</p>{{ end }}
     {{ with $data.summary }}<p class="lede">{{ . }}</p>{{ end }}
     <div class="hero-actions">
-      <a class="button" href="{{ (index $chapters 0).url }}">Start reading</a>
-      <a class="button ghost" href="{{ "/books/" | relURL }}">All novels</a>
+      <a class="button" href="{{ (index $chapters 0).url | relURL }}">Start reading</a>
+      <a class="button ghost" href="{{ "books/" | relURL }}">All novels</a>
     </div>
   </div>
 </section>
@@ -33,7 +33,7 @@
   <ol class="chapter-list">
     {{ range $chapters }}
       <li>
-        <a href="{{ .url }}">
+        <a href="{{ .url | relURL }}">
           <span class="chapter-number">{{ printf "%02d" (int .order) }}</span>
           <span class="chapter-name">{{ .title }}</span>
           <span class="chapter-arrow" aria-hidden="true">→</span>

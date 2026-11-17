@@ -65,7 +65,7 @@ foreach ($group in ($records | Group-Object Book)) {
     $chapterList += [ordered]@{
       order  = $current.Order
       title  = $current.Title
-      url    = "/posts/$($current.Source)/"
+      url    = "posts/$($current.Source)/"
       source = $current.Source
     }
     $chapters[$current.Source] = [ordered]@{
@@ -74,9 +74,9 @@ foreach ($group in ($records | Group-Object Book)) {
       order     = $current.Order
       count     = $ordered.Count
       title     = $current.Title
-      prevUrl   = if ($prev) { "/posts/$($prev.Source)/" } else { '' }
+      prevUrl   = if ($prev) { "posts/$($prev.Source)/" } else { '' }
       prevTitle = if ($prev) { $prev.Title } else { '' }
-      nextUrl   = if ($next) { "/posts/$($next.Source)/" } else { '' }
+      nextUrl   = if ($next) { "posts/$($next.Source)/" } else { '' }
       nextTitle = if ($next) { $next.Title } else { '' }
       words     = $current.Words
       empty     = $current.Empty

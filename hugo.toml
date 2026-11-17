@@ -1,4 +1,4 @@
-baseURL = 'https://thebestnovels.com/'
+baseURL = 'https://williamlone.github.io/thebestnovels/'
 locale = 'en-us'
 defaultContentLanguage = 'en'
 title = 'The Best Novels'
@@ -21,13 +21,13 @@ paginate = 30
 [[menu.main]]
   identifier = 'books'
   name = 'Books'
-  url = '/books/'
+  url = 'books/'
   weight = 10
 
 [[menu.main]]
   identifier = 'about'
   name = 'About'
-  url = '/about/'
+  url = 'about/'
   weight = 20
 
 [markup]

@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $books := slice }}
 {{ range $title, $book := hugo.Data.library.books }}
-  {{ $books = $books | append (dict "book" $title "count" $book.count "author" $book.author "summary" $book.summary "url" (printf "/book/%s/" (urlize $title))) }}
+  {{ $books = $books | append (dict "book" $title "count" $book.count "author" $book.author "summary" $book.summary "url" (printf "book/%s/" (urlize $title))) }}
 {{ end }}
 {{ $books = sort $books "book" "asc" }}
 

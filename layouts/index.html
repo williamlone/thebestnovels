@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $books := slice }}
 {{ range $title, $book := hugo.Data.library.books }}
-  {{ $books = $books | append (dict "book" $title "count" $book.count "author" $book.author "summary" $book.summary "url" (printf "/book/%s/" (urlize $title))) }}
+  {{ $books = $books | append (dict "book" $title "count" $book.count "author" $book.author "summary" $book.summary "url" (printf "book/%s/" (urlize $title))) }}
 {{ end }}
 {{ $books = sort $books "book" "asc" }}
 {{ $featured := first 8 (sort $books "count" "desc") }}
@@ -14,7 +14,7 @@
     <p class="hero-tagline">{{ .Site.Params.tagline }}</p>
     <p class="hero-intro">{{ truncate 300 .Site.Params.intro }}</p>
     <div class="hero-actions">
-      <a class="button" href="{{ "/books/" | relURL }}">Explore the library</a>
+      <a class="button" href="{{ "books/" | relURL }}">Explore the library</a>
       {{ with first 1 $books }}
         <a class="button ghost" href="{{ (index . 0).url | relURL }}">Begin with {{ (index . 0).book }}</a>
       {{ end }}
@@ -40,7 +40,7 @@
       <p class="eyebrow">The long reads</p>
       <h2>Epic novels for a slow season</h2>
     </div>
-    <a class="text-link" href="{{ "/books/" | relURL }}">View all novels <span aria-hidden="true">→</span></a>
+    <a class="text-link" href="{{ "books/" | relURL }}">View all novels <span aria-hidden="true">→</span></a>
   </div>
   <div class="book-grid compact">
     {{ range $featured }}{{ partial "book-card.html" . }}{{ end }}
@@ -56,7 +56,7 @@
   </div>
   <div>
     <p>{{ .Site.Params.intro }}</p>
-    <a class="text-link" href="{{ "/about/" | relURL }}">About this library <span aria-hidden="true">→</span></a>
+    <a class="text-link" href="{{ "about/" | relURL }}">About this library <span aria-hidden="true">→</span></a>
   </div>
 </section>
 {{ end }}
