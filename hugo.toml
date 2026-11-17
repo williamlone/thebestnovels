@@ -1,0 +1,3 @@
+baseURL = 'https://thebestnovels.com/'
+locale = 'en-us'
+title = 'The Best Novels'
