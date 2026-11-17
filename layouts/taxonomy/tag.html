@@ -1,0 +1,45 @@
+{{ define "main" }}
+{{ $book := .Data.Term }}
+{{ $data := index hugo.Data.library.books $book }}
+{{ $chapters := $data.chapters }}
+
+<section class="book-hero">
+  <div class="book-hero-cover cover-{{ mod (len $book) 6 }}" aria-hidden="true">
+    <span class="cover-initial">{{ upper (substr $book 0 1) }}</span>
+    <span class="cover-name">{{ $book }}</span>
+    <span class="cover-line"></span>
+    <span class="cover-imprint">THE BEST NOVELS</span>
+  </div>
+  <div class="book-hero-text">
+    <p class="eyebrow">A complete novel · {{ len $chapters }} sections</p>
+    <h1>{{ $book }}</h1>
+    {{ with $data.author }}<p class="book-hero-author">by {{ . }}</p>{{ end }}
+    {{ with $data.summary }}<p class="lede">{{ . }}</p>{{ end }}
+    <div class="hero-actions">
+      <a class="button" href="{{ (index $chapters 0).url }}">Start reading</a>
+      <a class="button ghost" href="{{ "/books/" | relURL }}">All novels</a>
+    </div>
+  </div>
+</section>
+
+<section class="section toc-section">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">Read in order</p>
+      <h2>Table of contents</h2>
+    </div>
+    <span class="section-note">{{ len $chapters }} sections</span>
+  </div>
+  <ol class="chapter-list">
+    {{ range $chapters }}
+      <li>
+        <a href="{{ .url }}">
+          <span class="chapter-number">{{ printf "%02d" (int .order) }}</span>
+          <span class="chapter-name">{{ .title }}</span>
+          <span class="chapter-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    {{ end }}
+  </ol>
+</section>
+{{ end }}

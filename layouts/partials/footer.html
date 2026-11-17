@@ -1,0 +1,16 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="brand-mark" aria-hidden="true">TB</span>
+      <div>
+        <strong>{{ .Site.Title }}</strong>
+        <p>{{ .Site.Params.readingNote }}</p>
+      </div>
+    </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      {{ range .Site.Menus.main }}<a href="{{ .URL | relURL }}">{{ .Name }}</a>{{ end }}
+      <a href="{{ "/tags/" | relURL }}">Topics</a>
+    </nav>
+    <p class="footer-copy">A public-domain reading library · {{ now.Format "2006" }}</p>
+  </div>
+</footer>

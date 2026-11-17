@@ -1,0 +1,17 @@
+<section class="section library" id="{{ .id | default "books" }}">
+  <div class="section-head">
+    <div>
+      <p class="eyebrow">{{ .eyebrow | default "The collection" }}</p>
+      <h2>{{ .heading | default "Every novel, A–Z" }}</h2>
+    </div>
+    <label class="search-box">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      <input id="book-search" type="search" placeholder="Search titles…" autocomplete="off" aria-label="Search novels">
+    </label>
+  </div>
+  <p class="search-status" id="search-status" aria-live="polite">Showing {{ len .books }} novels</p>
+  <div class="book-grid" id="book-grid">
+    {{ range .books }}{{ partial "book-card.html" . }}{{ end }}
+  </div>
+  <p class="no-results" id="no-results" hidden>No novels match that search.</p>
+</section>

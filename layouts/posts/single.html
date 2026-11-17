@@ -1,0 +1,70 @@
+{{ define "main" }}
+{{ $source := .File.ContentBaseName }}
+{{ $meta := index hugo.Data.library.chapters $source }}
+{{ $book := $meta.book }}
+{{ $bookURL := printf "/book/%s/" (urlize $book) }}
+{{ $chapters := (index hugo.Data.library.books $book).chapters }}
+{{ $i := $meta.index }}
+{{ $start := 0 }}{{ if gt $i 7 }}{{ $start = sub $i 7 }}{{ end }}
+{{ $end := sub (len $chapters) 1 }}{{ $limit := add $i 7 }}{{ if lt $limit $end }}{{ $end = $limit }}{{ end }}
+{{ $window := first (add (sub $end $start) 1) (after $start $chapters) }}
+
+<div class="reader-shell">
+  <aside class="reader-sidebar">
+    <details class="toc" open>
+      <summary>In this book <span>{{ $meta.count }}</span></summary>
+      <ol>
+        {{ range $window }}
+          <li{{ if eq .source $source }} class="current"{{ end }}>
+            <a href="{{ .url }}"><span>{{ printf "%02d" (int .order) }}</span>{{ .title }}</a>
+          </li>
+        {{ end }}
+      </ol>
+      <a class="toc-all" href="{{ $bookURL | relURL }}">Full table of contents →</a>
+    </details>
+  </aside>
+
+  <article class="reader">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="{{ "/" | relURL }}">Home</a><span aria-hidden="true">/</span>
+      <a href="{{ "/books/" | relURL }}">Books</a><span aria-hidden="true">/</span>
+      <a href="{{ $bookURL | relURL }}">{{ $book }}</a>
+    </nav>
+
+    <header class="chapter-head">
+      <p class="eyebrow">{{ $book }} <span class="dot">·</span> Section {{ $meta.order }} of {{ $meta.count }}</p>
+      <h1>{{ $meta.title }}</h1>
+      <div class="reader-tools">
+        <span>{{ $meta.words }} words</span>
+        <span class="tool-divider" aria-hidden="true"></span>
+        <span class="font-label">Text size</span>
+        <button type="button" class="font-btn" id="font-decrease" aria-label="Decrease text size">A−</button>
+        <button type="button" class="font-btn" id="font-increase" aria-label="Increase text size">A+</button>
+      </div>
+    </header>
+
+    {{ if $meta.empty }}
+      <p class="empty-note">This section is a placeholder in the source edition. Use the table of contents to continue reading.</p>
+    {{ end }}
+
+    <div class="prose chapter-body">{{ .Content }}</div>
+
+    <nav class="chapter-pager" aria-label="Chapter navigation">
+      {{ with $meta.prevUrl }}
+        <a class="pager-link prev" href="{{ . }}" data-key="prev">
+          <span class="pager-dir">← Previous</span><strong>{{ $meta.prevTitle }}</strong>
+        </a>
+      {{ else }}
+        <span></span>
+      {{ end }}
+      {{ with $meta.nextUrl }}
+        <a class="pager-link next" href="{{ . }}" data-key="next">
+          <span class="pager-dir">Next →</span><strong>{{ $meta.nextTitle }}</strong>
+        </a>
+      {{ end }}
+    </nav>
+
+    <p class="reader-back"><a href="{{ $bookURL | relURL }}">← Back to the {{ $book }} table of contents</a></p>
+  </article>
+</div>
+{{ end }}

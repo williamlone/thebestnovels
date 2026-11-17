@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ $books := slice }}
+{{ range $title, $book := hugo.Data.library.books }}
+  {{ $books = $books | append (dict "book" $title "count" $book.count "author" $book.author "summary" $book.summary "url" (printf "/book/%s/" (urlize $title))) }}
+{{ end }}
+{{ $books = sort $books "book" "asc" }}
+
+<section class="page-head">
+  <p class="eyebrow">The master list</p>
+  <h1>{{ .Title }}</h1>
+  <div class="prose">{{ .Content }}</div>
+</section>
+
+{{ partial "book-grid.html" (dict "books" $books "id" "library" "eyebrow" "The collection" "heading" "Browse by title") }}
+{{ end }}

@@ -1,3 +1,35 @@
 baseURL = 'https://thebestnovels.com/'
 locale = 'en-us'
+defaultContentLanguage = 'en'
 title = 'The Best Novels'
+description = 'The Greatest Books of All Time You Must Read'
+enableRobotsTXT = true
+paginate = 30
+
+[taxonomies]
+  tag = 'tags'
+
+[params]
+  tagline = 'The Greatest Books of All Time You Must Read'
+  intro = '''List of 100 best books of all time, the greatest novel of all time. This list is generated from a variety of great sources. An algorithm is used to create a master list based on how many lists a particular book appears on. Some lists count more than others. On the lists that are actually ranked, the book that is 1st counts a lot more than the book that's 100th.'''
+  readingNote = "Read the world's greatest novels in full, one chapter at a time."
+
+[permalinks]
+  posts = '/posts/:contentbasename/'
+  tags = '/book/:slug/'
+
+[[menu.main]]
+  identifier = 'books'
+  name = 'Books'
+  url = '/books/'
+  weight = 10
+
+[[menu.main]]
+  identifier = 'about'
+  name = 'About'
+  url = '/about/'
+  weight = 20
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = false
