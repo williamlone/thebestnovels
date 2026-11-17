@@ -2,7 +2,7 @@
 {{ $source := .File.ContentBaseName }}
 {{ $meta := index hugo.Data.library.chapters $source }}
 {{ $book := $meta.book }}
-{{ $bookURL := printf "book/%s/" (urlize $book) }}
+{{ $bookURL := printf "books/%s/" (urlize $book) }}
 {{ $chapters := (index hugo.Data.library.books $book).chapters }}
 {{ $i := $meta.index }}
 {{ $start := 0 }}{{ if gt $i 7 }}{{ $start = sub $i 7 }}{{ end }}

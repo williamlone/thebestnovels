@@ -15,8 +15,8 @@ paginate = 30
   readingNote = "Read the world's greatest novels in full, one chapter at a time."
 
 [permalinks]
-  posts = '/posts/:contentbasename/'
-  tags = '/book/:slug/'
+  chapters = '/posts/:contentbasename/'
+  tags = '/books/:slug/'
 
 [[menu.main]]
   identifier = 'books'

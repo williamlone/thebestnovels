@@ -1,11 +1,11 @@
 $ErrorActionPreference = 'Stop'
 
 $root = Split-Path -Parent $PSScriptRoot
-$postsDir = Join-Path $root 'content/posts'
+$chaptersDir = Join-Path $root 'content/chapters'
 $outFile = Join-Path $root 'data/library.json'
 
 $records = @()
-foreach ($file in Get-ChildItem -LiteralPath $postsDir -Filter '*.md' | Sort-Object Name) {
+foreach ($file in Get-ChildItem -LiteralPath $chaptersDir -Filter '*.md' | Sort-Object Name) {
   $raw = Get-Content -LiteralPath $file.FullName -Raw -Encoding UTF8
   if ($raw -notmatch '(?s)^---\s*\r?\n(?<front>.*?)\r?\n---\s*\r?\n(?<body>.*)$') { continue }
   $front = $Matches['front']
